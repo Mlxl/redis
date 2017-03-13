@@ -21,7 +21,7 @@ public class Head extends RFrame{
 			headPanel.add(new JButton(s));
 		}
 		
-		MyTableModel model=new MyTableModel(20,7);
+		MyTableModel model=new MyTableModel(raw_count,clumn_count);
 		
 		JTable table=new JTable(model);
 		scrollPane.setViewportView(table);
@@ -35,16 +35,16 @@ public class Head extends RFrame{
 		tcm.getColumn(2).setCellEditor(new DefaultCellEditor(com));
 		//model.isCellEditable(0, 3);
 		//∆ÙÕ£¿∏≤Â»Î∞¥≈•
-		table.getColumnModel().getColumn(5).setCellEditor(new MyButtonEditor());
+		table.getColumnModel().getColumn(5).setCellEditor(new MyButtonEditor(table));
 		table.getColumnModel().getColumn(5).setCellRenderer(new MyButtonRenderer());
 		table.setRowSelectionAllowed(false);
 		
 		//…Ë÷√øÌ∂»
 		int columnCount=table.getColumnCount();
 		for(int i=0;i<columnCount;i++){
-			if(0==i||6==i){
+			if(i==1){
 				TableColumn tableColumn=table.getColumnModel().getColumn(i);
-				tableColumn.setPreferredWidth(90);
+				tableColumn.setPreferredWidth(180);
 			}
 		}
 	}

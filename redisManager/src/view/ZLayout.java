@@ -4,12 +4,12 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 
-class Layout extends RFrame{
+class ZLayout extends RFrame{
 	
 	JPanel panel=new JPanel();
 	JPanel menuPanel=new JPanel();
 	
-	public Layout(){
+	public ZLayout(){
 		setLayout(new BorderLayout());
 		add(menuPanel,BorderLayout.NORTH);
 		add(panel,BorderLayout.CENTER);

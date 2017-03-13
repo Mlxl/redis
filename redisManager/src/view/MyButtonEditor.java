@@ -27,7 +27,8 @@ public class MyButtonEditor extends DefaultCellEditor
   
     private JButton button;  
   
-    public MyButtonEditor()  
+    private JTable table;
+    public MyButtonEditor(JTable table)  
     {  
         // DefautlCellEditor有此构造器，需要传入一个，但这个不会使用到，直接new一个即可。   
         super(new JTextField());  
@@ -41,6 +42,7 @@ public class MyButtonEditor extends DefaultCellEditor
   
         // 添加按钮。   
         this.panel.add(this.button);  
+        this.table=table;
     }  
   
     private void initButton()  
@@ -58,7 +60,7 @@ public class MyButtonEditor extends DefaultCellEditor
                 // 触发取消编辑的事件，不会调用tableModel的setValue方法。   
                 MyButtonEditor.this.fireEditingCanceled();  
                 Head.headPanel.setBackground(Color.pink);
-                
+                table.getModel().setValueAt("555", 0, 4);
                 // 可以将table传入，通过getSelectedRow,getSelectColumn方法获取到当前选择的行和列及其它操作等。   
             }  
         });  

@@ -1,59 +1,74 @@
 package view;
 
+import model.Connect;
+import model.NodeInfomation;
+
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;
 
 public class MyTableModel extends DefaultTableModel{
 	
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Vector content=null;
+	private Vector content;
 	
 	private int size;
 	
-	private String []title_name={"地址","端口","角色","主节点","状态","启停","槽点"};
+	private String []title_name={"节点","地址","角色","主节点","状态","启停","槽点"};
 	
 	 public MyTableModel() {  
 	    	content = new Vector();  
 	    }  
 	public MyTableModel(int i){
-		content=new Vector(i);
-		for(int j=0;j<i;j++){
-			Vector v=new Vector(7);
-			v.add(0,"xxxxxxx1");
-			v.add(1,"6739");
-			v.add(2,"主节点");
-			v.add(3,"无");
-			v.add(4,"未启动");
+		Connect con=new Connect();
+		List<NodeInfomation> info=con.getInfomation();
+		content=new Vector(info.size());
+		for(int j1=0;j1<info.size();j1++){
+			Vector<String> v=new Vector<String>();
+			//节点编号
+			v.add(0,"编号"+j1);
+			//地址
+			v.add(1,info.get(j1).getlocation());
+			//角色
+			v.add(2,info.get(j1).getRoles());
+			//主节点
+			v.add(3,info.get(j1).getMasterID());
+			v.add(4,"已启动");
 			v.add(5,"启动");
-			v.add(6,"1-16383");
+			v.add(6,info.get(j1).getSlotf());
 			content.add(v);
 		}
-	}
 	
+		this.size=info.size();
+	}
+		
+	
+	//
 	public MyTableModel(int i, int j) {
 		super(i, j);
 		
-
-		content=new Vector(i);
-		for(int j1=0;j1<i;j1++){
-			Vector v=new Vector(7);
-			v.add(0,"xxxxxxx1");
-			v.add(1,"6739");
-			v.add(2,"主节点");
-			v.add(3,"无");
-			v.add(4,"未启动");
+		Connect con=new Connect();
+		List<NodeInfomation> info=con.getInfomation();
+		content=new Vector(info.size());
+		for(int j1=0;j1<info.size();j1++){
+			Vector<String> v=new Vector<String>();
+			//节点编号
+			v.add(0,"节点"+j1);
+			//地址
+			v.add(1,info.get(j1).getlocation());
+			//角色
+			v.add(2,info.get(j1).getRoles());
+			//主节点
+			v.add(3,info.get(j1).getMaster());
+			v.add(4,"已启动");
 			v.add(5,"启动");
-			v.add(6,"1-16383");
+			v.add(6,info.get(j1).getSlotf());
 			content.add(v);
 		}
 	
-		this.size=j;
+		this.size=info.size();
 	}
 	//负责数据显示
     @Override  
@@ -88,10 +103,11 @@ public class MyTableModel extends DefaultTableModel{
     /**  
      * 返回数据类型  
      */  
-//    public Class getColumnClass(int col) {  
-//        return getValueAt(0, col).getClass();  
-//    }  
-
+    public Class getColumnClass(int col) {  
+        return getValueAt(0, col).getClass();  
+    }  
+    
+    //是否可编辑
 	@Override
 	public boolean isCellEditable(int row ,int col){
 		switch(col){

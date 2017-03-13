@@ -7,13 +7,20 @@ public class NodeInfomation {
 	//端口
 	private String location;
 	//角色  true为主节点
-	private boolean roles;
+	private String roles;
 	//主节点
 	private String masterID;
 	//状态 
 	private boolean state;
 	//slot
 	private String slotf;
+	private String master;
+	public String getMaster() {
+		return master;
+	}
+	public void setMaster(String master) {
+		this.master=master;
+	}
 	public NodeInfomation(){
 		
 	}
@@ -29,11 +36,14 @@ public class NodeInfomation {
 	public void setlocation(String location) {
 		this.location = location;
 	}
-	public boolean isRoles() {
+	public String getRoles() {
 		return roles;
 	}
 	public void setRoles(boolean roles) {
-		this.roles = roles;
+		if(roles==true)
+			this.roles ="主节点";
+		else
+			this.roles="从节点";
 	}
 	public String getMasterID() {
 		return this.masterID;
